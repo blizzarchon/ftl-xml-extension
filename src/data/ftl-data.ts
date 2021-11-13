@@ -143,6 +143,25 @@ let weaponTags: XmlTag[] = [
     {name: 'stun', attributes: []},
 ];
 let weaponTagNames = [...weaponTags.map(t => t.name), 'title'];
+let droneTags: XmlTag[] = [
+    {name: 'type', attributes: []},
+    {name: 'level', attributes: []},
+    {name: 'tip', attributes: []},
+    {name: 'target', attributes: []},
+    {name: 'short', attributes: [{name: 'id', valueSet: TextIdNames.name}]},
+    {name: 'desc', attributes: [{name: 'id', valueSet: TextIdNames.name}]},
+    {name: 'power', attributes: []},
+    {name: 'cooldown', attributes: []},
+    {name: 'dodge', attributes: []},
+    {name: 'speed', attributes: []},
+    {name: 'cost', attributes: []},
+    {name: 'bp', attributes: []},
+    {name: 'droneImage', attributes: []},
+    {name: 'image', attributes: []},
+    {name: 'weaponBlueprint', attributes: []},
+    {name: 'rarity', attributes: []},
+];
+let droneTagNames = [...droneTags.map(t => t.name), 'title'];
 export const BlueprintListTypeAny = 'any';
 export const FtlData: XmlData = {
     version: 1.1,
@@ -256,14 +275,24 @@ export const FtlData: XmlData = {
             name: 'weaponBlueprint',
             tags: weaponTagNames,
             requiredTags: [
-                'type', 'title', 'short', 'tip', 'desc', 'tooltip', 'damage', 'sp',
-                'fireChance', 'breachChance', 'cooldown', 'power', 'cost', 'bp',
-                'rarity', 'image', 'launchSounds', 'hitShipSounds', 'weaponArt'
+                'type', 'title', 'short', 'desc',
+                'shots', 'damage', 'sp',
+                'cooldown', 'power', 'cost', 'rarity',
+                'launchSounds', 'weaponArt'
             ],
             attributes: [{name: 'name'}]
         },
         ...weaponTags,
-        {name: 'droneBlueprint', attributes: [{name: 'name'}]},
+        {
+            name: 'droneBlueprint', 
+            tags: droneTagNames,
+            requiredTags: [
+                'type', 'title', 'short', 'desc',
+                'power', 'cost', 'rarity'
+            ],
+            attributes: [{name: 'name'}]
+        },
+        ...droneTags,
         {name: 'augmentBlueprint', attributes: [{name: 'name'}]},
         {
             name: 'damage',
